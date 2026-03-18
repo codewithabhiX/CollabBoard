@@ -18,9 +18,12 @@ export default class TaskCardService {
         }
     }
 
-    static async updateTaskCard(id, updateData) {
+    static async updateTaskCard(id, updateData,userId) {
         try {
-            await taskCardModel.findByIdAndUpdate(id, updateData);
+             const  isUserSame = await taskCardModel.findOne({_id:id,userId:userId})
+             if(isUserSame){
+                await taskCardModel.findByIdAndUpdate(id, updateData);
+             }
         } catch (error) {
             throw new Error("Error updating task card: " + error.message);
         }   
@@ -28,7 +31,10 @@ export default class TaskCardService {
 
         static async deleteTaskCard(id) {   
         try {
+            const  isUserSame = await taskCardModel.findOne({_id:id,userId:userId})
+             if(isUserSame){
             await taskCardModel.findByIdAndDelete(id);
+             }
         } catch (error) {
             throw new Error("Error deleting task card: " + error.message);
         }

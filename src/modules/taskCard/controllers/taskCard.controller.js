@@ -35,7 +35,8 @@ export default class TaskCardController {
         try {
             const { id } = req.params;
             const updateData = req.body;
-            await TaskCardService.updateTaskCard(id, updateData);
+            const userId=req.user.id;
+            await TaskCardService.updateTaskCard(id, updateData,userId);
             return res.status(200).json({
                 success: true,
                 message: "Task card updated successfully",
@@ -51,7 +52,8 @@ export default class TaskCardController {
     static async deleteTaskCard(req, res) { 
         try {
             const { id } = req.params;
-            await TaskCardService.deleteTaskCard(id);
+            const userId=req.user.id
+            await TaskCardService.deleteTaskCard(id,userId);
             return res.status(200).json({
                 success: true,
                 message: "Task card deleted successfully",
