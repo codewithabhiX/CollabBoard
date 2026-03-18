@@ -4,8 +4,10 @@ export default class TaskCardController {
     static async createTaskCard(req, res) {
         try {
             console.log(req.body);
+            console.log(req.user.id);
             const { title, description,taskAssignedTo, status } = req.body;
-            const taskCardData = { title, description, taskAssignedTo , status};
+            const id=req.user.id;
+            const taskCardData = { title, description, taskAssignedTo , status,id};
             await TaskCardService.createTaskCard(taskCardData);
             return res.status(201).json({
                 success: true,

@@ -17,6 +17,10 @@ const taskCardSchema = new mongoose.Schema({
         type: String,
         enum: ["To Do", "In Progress", "Done"],
         default: "To Do"
+    },
+    userId:{
+        type: String,
+        required: true
     }
 
 });
