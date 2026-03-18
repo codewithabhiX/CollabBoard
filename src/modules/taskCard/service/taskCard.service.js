@@ -29,7 +29,7 @@ export default class TaskCardService {
         }   
     }
 
-        static async deleteTaskCard(id) {   
+        static async deleteTaskCard(id,userId) {   
         try {
             const  isUserSame = await taskCardModel.findOne({_id:id,userId:userId})
              if(isUserSame){
