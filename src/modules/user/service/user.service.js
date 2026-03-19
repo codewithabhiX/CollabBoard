@@ -21,7 +21,16 @@ export default class UserService {
             throw new Error("Error checking user existence: " + error.message);
         }
     }
-
+    
+    static async isUserNameExists(userName) {
+        try {
+            const user = await UserModel.findOne({ userName });
+            return !!user;
+        } catch (error) {
+            throw new Error("Error checking user existence: " + error.message);
+        }
+    }
+    
     static async getUser(email){
         try{
             const user = await UserModel.findOne({ email });

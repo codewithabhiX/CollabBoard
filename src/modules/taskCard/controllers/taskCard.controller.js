@@ -22,6 +22,7 @@ export default class TaskCardController {
     }
 
     static async getAllTaskCards(req, res) {
+         
         // Implementation for getting all task cards
         // This is a placeholder - you should implement the actual logic to fetch all task cards from the database
         return res.status(200).json({

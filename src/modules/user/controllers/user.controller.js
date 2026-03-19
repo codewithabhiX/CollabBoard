@@ -7,11 +7,19 @@ export default class UserController {
   static async registerUser(req, res) {
     console.log("Register User Request Body:", req.body); // Debugging log
     try {
-      const { name, email, password } = req.body;
-      const userData = { name, email, password };
+      const { name, email, password ,userName} = req.body;
+      const userData = { name, email, password,userName };
 
-      const userExists = await UserService.isUserExists(email);
-      if (userExists) {
+      const userEmail = await UserService.isUserExists(email);
+      if (userEmail) {
+        return res.status(409).json({
+          success: false,
+          message: "Email already exists",
+        });
+      }
+
+      const isUserName = await UserService.isUserNameExists(userName);
+      if (isUserName) {
         return res.status(409).json({
           success: false,
           message: "User already exists",
