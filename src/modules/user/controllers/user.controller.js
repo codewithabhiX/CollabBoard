@@ -80,6 +80,7 @@ export default class UserController {
         id: user._id,
         name: user.name,
         email: user.email,
+        userName:user.userName
       };
 
       const { accessToken } =  generateToken(payload);
