@@ -6,6 +6,12 @@ export default class TaskCardController {
             console.log(req.body);
             console.log(req.user.id);
             const { title, description,taskAssignedTo, status } = req.body;
+            
+             const taskAssigned=await TaskCardService.findUserName(taskAssignedTo)
+               
+            if(!taskAssigned){
+               throw new Error("UserName not found");
+            }
             const userId=req.user.id;
             const taskCardData = { title, description, taskAssignedTo , status,userId};
             await TaskCardService.createTaskCard(taskCardData);
@@ -16,7 +22,7 @@ export default class TaskCardController {
         } catch (error) {
             return res.status(500).json({
                 success: false, 
-                message: "Internal Server Error",
+                message: `Internal Server Error:-${error}`,
             });
         }
     }

@@ -1,4 +1,6 @@
 import taskCardModel from "../models/taskCard.model.js";
+import UserModel from "../../user/models/user.model.js"
+
 export default class TaskCardService {
     static async createTaskCard(taskCardData) {
         try {
@@ -15,6 +17,14 @@ export default class TaskCardService {
             return await taskCardModel.find();
         } catch (error) {
             throw new Error("Error fetching task cards: " + error.message);
+        }
+    }
+
+    static async findUserName(taskAssignedTo){
+        try{
+            return await UserModel.findOne({userName:taskAssignedTo})
+        }catch(error){
+            throw new Error("No UserName found: " + error.message); 
         }
     }
 
