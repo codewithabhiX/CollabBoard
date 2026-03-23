@@ -1,10 +1,11 @@
 import TaskCardController from "../controllers/taskCard.controller.js";
 import express from "express";
 import authMiddleware from "../../../../middlewares/authMiddleware.js";
+import fileUpload from '../../../../middlewares/fileUpload.middleware.js'
 
 const taskCardRoutes = express.Router();
 
-taskCardRoutes.post('/taskcard',authMiddleware, TaskCardController.createTaskCard);
+taskCardRoutes.post('/taskcard',authMiddleware,fileUpload.single("audio"), TaskCardController.createTaskCard);
 taskCardRoutes.get('/taskcard', authMiddleware, TaskCardController.getAllTaskCards);
 taskCardRoutes.put('/taskcard/:id', authMiddleware, TaskCardController.updateTaskCard);
 taskCardRoutes.delete('/taskcard/:id', authMiddleware, TaskCardController.deleteTaskCard);

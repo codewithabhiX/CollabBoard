@@ -3,7 +3,7 @@ import generateToken from '../../../utils/generateTokens.js';
 import hashData from "../../../utils/hashData.js";
 
 export default class UserController {
-
+  
   static async registerUser(req, res) {
     console.log("Register User Request Body:", req.body); // Debugging log
     try {
